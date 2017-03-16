@@ -1,0 +1,20 @@
+.main-header.cover .main-header-content .social-link, .scroll-down {
+    #{$a-tags} {
+        text-decoration: none;
+        font-size: 2em;
+        color: #a2a2a2;
+    }
+    #{$a-tags-hover} {
+        color: #ffffff;
+    }
+}
+.main-header.no-cover .main-header-content .social-link {
+    #{$a-tags} {
+        text-decoration: none;
+        font-size: 2em;
+        color: #a2a2a2;
+    }
+    #{$a-tags-hover} {
+        color: #000000;
+    }
+}

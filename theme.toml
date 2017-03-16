@@ -1,0 +1,18 @@
+name = "Campser"
+license = "MIT"
+licenselink = "https://github.com/DanielMuller/hugo-theme-campser/blob/master/LICENSE.md"
+description = "AMP version of the Casper theme from https://github.com/vjeantet/hugo-theme-casper (itself based on casper theme for Ghost)"
+homepage = "https://github.com/DanielMuller/hugo-theme-campser"
+tags = ["blog"]
+features = ["amp", "google analytics", "share"]
+min_version = 0.19
+
+[author]
+  name = "Daniel Muller"
+  homepage = "https://daniel.ctrlaltdel.ch/"
+
+# If porting an existing theme
+[original]
+  name = "Casper"
+  homepage = "https://github.com/vjeantet/hugo-theme-casper"
+  repo = "https://github.com/vjeantet/hugo-theme-casper"

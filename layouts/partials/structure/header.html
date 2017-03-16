@@ -1,0 +1,24 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html ⚡ lang="en" class="no-js oldie"><![endif]-->
+<!--[if IE 8 ]><html ⚡ lang="en" class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html ⚡ lang="en" class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html ⚡ lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en{{ end }}" class="no-js"><!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        {{ partial "amp/header" . }}
+        <link rel="canonical" href="{{ .Permalink }}">
+        <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+        <link href="{{ if .Site.Params.RSSLink}}{{.Site.Params.RSSLink  | relURL}}{{else}}{{ .RSSLink  | relURL}}{{end}}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title | title }} - {{ .Site.Params.description | title }}" />
+        <link href="{{ if .Site.Params.RSSLink}}{{.Site.Params.RSSLink  | relURL}}{{else}}{{ .RSSLink  | relURL}}{{end}}" rel="feed" type="application/rss+xml" title="{{ .Site.Title | title }} - {{ .Site.Params.description | title }}" />
+
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,700,700i|Open+Sans:400,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        <meta name="theme-color" content="{{ $.Site.Params.themeColor }}" />
+
+        <title>{{ if .IsHome }}{{ .Site.Title | title }} &middot; {{ .Site.Params.description | title }}{{else}}{{ .Title | title }} &middot; {{ .Site.Title | title }}{{ end }}</title>
+    </head>
+<body>
+{{ partial "navigation/sidebar" .}}
+<div class="site-wrapper">

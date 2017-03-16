@@ -1,0 +1,30 @@
+{{ if not .Params.noauthor }}
+{{$.Scratch.Set "author" .Site.Author}}
+{{if .Params.author }}
+    {{if isset .Site.Data.authors (.Params.author | lower)}}
+        {{$author := index .Site.Data.authors (.Params.author | lower) }}
+        {{$.Scratch.Set "author" $author}}
+    {{end}}
+{{end}}
+{{$author := ($.Scratch.Get "author")}}
+
+{{ if isset $author "thumbnail" }}
+    <amp-img class="author-thumb" src="{{ $author.thumbnail | relURL }}" layout="fixed" width="24" height="24" alt="Author image"></amp-img>
+{{end}}
+{{$author.name}}
+{{if .Params.categories }}
+in
+    {{ range $index, $category := .Params.categories }}
+        {{ if gt $index 0 }}, {{ end }}<a href="{{ "/categories/" | relURL }}{{ . | urlize }}">{{ . }}</a>
+    {{ end }}
+{{end}}
+{{if .Params.tags }}
+on
+    {{ range $index, $tag := .Params.tags }}
+        {{ if gt $index 0 }}, {{ end }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}">#{{ . }}</a>
+    {{ end }}
+{{end}}
+<time class="post-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">
+    {{ .Date.Format "2 January 2006" }}
+</time>
+{{ end }}

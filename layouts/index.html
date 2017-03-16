@@ -1,0 +1,24 @@
+{{ partial "structure/header.html" . }}
+
+<header class="main-header {{if isset .Site.Params "cover" }}cover{{else}}no-cover{{end}}">
+    <nav class="main-nav overlay clearfix">
+        {{ partial "navbar.html" . }}
+    </nav>
+
+    <div class="vertical">
+        <div class="main-header-content inner">
+            <div class="social-link">
+                {{ partial "social/home.html" . }}
+            </div>
+            <h1 class="page-title">{{ .Site.Title }}</h1>
+            <h2 class="page-description">{{ .Site.Params.description }}</h2>
+        </div>
+    </div>
+    <div class="scroll-down"><a href="#content"><i class="fa fa-angle-down"></i></a></div>
+</header>
+
+<main id="content" class="content" role="main">
+{{ partial "home-content.html" . }}
+</main>
+
+{{ partial "structure/footer.html" . }}

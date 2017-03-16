@@ -1,0 +1,19 @@
+<article class="post type-{{ .Section }}">
+    <header class="post-header">
+        <h2 class="post-title"><a href="{{ .RelPermalink }}">{{ .Title |title }}</a></h2>
+    </header>
+    <section class="post-excerpt">
+        {{ if and (isset .Params "excerpt") (.Params.excerpt) }}
+            <p class="excerpt">{{ .Params.excerpt }} <a class="read-more" href="{{.RelPermalink}}">Read More…</a></p>
+        {{else}}
+            <p class="summary">{{ .Summary}}
+                {{ if .Truncated }}
+                    <a class="read-more" href="{{.RelPermalink}}">Read More…</a>
+                {{end}}
+            </p>
+        {{end}}
+      </section>
+    <footer class="post-meta">
+    {{ partial "post_meta" .}}
+    </footer>
+</article>

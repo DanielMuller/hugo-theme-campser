@@ -1,0 +1,41 @@
+{{ partial "structure/header.html" . }}
+
+{{if .Params.cover}}
+  <header class="main-header tag-head list-cover">
+{{else if .Site.Params.cover}}
+  <header class="main-header tag-head cover">
+{{else}}
+    <header class="main-header tag-head no-cover">
+{{end}}
+    <nav class="main-nav overlay clearfix">
+      {{ partial "navbar.html" . }}
+    </nav>
+    <div class="vertical">
+        <div class="main-header-content inner">
+            <h1 class="page-title">{{.Title}}</h1>
+            <h2 class="page-description">
+                {{if .Params.description}}
+                    {{.Params.description}}
+                {{end}}
+            </h2>
+        </div>
+    </div>
+</header>
+
+<main class="content" role="main">
+    {{ $paginator := .Paginator }}
+
+    <div class="extra-pagination inner">
+    {{ partial "navigation/pagination.html" $paginator }}
+    </div>
+
+    {{ range $index, $page := $paginator.Pages }}
+       {{ partial "list.html" . }}
+    {{ end }}
+
+    {{ partial "navigation/pagination.html" $paginator }}
+</main>
+
+
+
+{{ partial "structure/footer.html" . }}

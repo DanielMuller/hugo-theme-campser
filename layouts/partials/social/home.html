@@ -1,0 +1,54 @@
+{{ if .Site.Params.linkedinName }}
+    <a href="https://www.linkedin.com/in/{{ .Site.Params.linkedinName }}" target="_blank">
+        <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+    </a>
+&nbsp;
+{{end}}
+{{ if .Site.Params.githubName }}
+    <a href="https://github.com/{{ .Site.Params.githubName }}" target="_blank">
+        <i class="fa fa-github" aria-hidden="true"></i>
+    </a>
+&nbsp;
+{{end}}
+{{ if .Site.Params.flickrName }}
+    <a href="https://flickr.com/{{ .Site.Params.flickrName }}" target="_blank">
+        <i class="fa fa-flickr" aria-hidden="true"></i>
+    </a>
+&nbsp;
+{{end}}
+{{ if .Site.Params.twitterName }}
+    <a href="https://twitter.com/{{ .Site.Params.twitterName }}" target="_blank">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+    </a>
+&nbsp;
+{{end}}
+{{ if .Site.Params.facebookName }}
+    <a href="https://www.facebook.com/{{ .Site.Params.facebookName }}" target="_blank">
+        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+    </a>
+&nbsp;
+{{end}}
+{{ if .Site.Params.instagramName }}
+    <a href="https://instagram.com/{{ .Site.Params.instagramName }}" target="_blank">
+        <i class="fa fa-instagram" aria-hidden="true"></i>
+    </a>
+&nbsp;
+{{end}}
+{{ if .Site.Params.email }}
+    <a href="mailto:{{ .Site.Params.email }}" target="_blank">
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+    </a>
+&nbsp;
+{{end}}
+{{ if .Site.Params.pinterestName }}
+    <a href="https://www.pinterest.com/{{ .Site.Params.pinterestName }}" target="_blank">
+        <i class="fa fa-pinterest" aria-hidden="true"></i>
+    </a>
+&nbsp;
+{{end}}
+{{ if .Site.Params.googlePlusName }}
+    <a href="https://google.com/+{{ .Site.Params.googlePlusName }}" target="_blank">
+        <i class="fa fa-google-plus-official" aria-hidden="true"></i>
+    </a>
+&nbsp;
+{{end}}

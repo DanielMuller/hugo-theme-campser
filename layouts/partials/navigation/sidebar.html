@@ -1,0 +1,32 @@
+<amp-sidebar id="sidebar" layout="nodisplay" side="right">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close" on="tap:sidebar.close" role="button" tabindex="1">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        {{ $currentNode := . }}
+
+        {{ range .Site.Menus.main }}
+            {{ with .Pre}}<h3 class="nav-section">{{ . }}</h3>{{end}}
+            <li class="nav-opened{{if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .)}} nav-current{{end}}" role="presentation">
+                <a href="{{.URL}}">{{.Name}}</a>
+            </li>
+        {{end}}
+        <amp-accordion>
+        {{ range $taxonomyname, $taxonomy := .Site.Taxonomies }}
+            <section>
+                <h3 class="nav-section">
+                    <i class="fa fa-caret-down section-open" aria-hidden="true"></i>
+                    <i class="fa fa-caret-right section-close" aria-hidden="true"></i>
+                    {{ $taxonomyname | title }}
+                </h3>
+                <div>
+                {{ range $key, $value := $taxonomy }}
+                    <li class="nav-opened" role="presentation"><a href="/{{ $taxonomyname | urlize }}/{{ $key | urlize }}">{{ $key }}</a></li>
+                {{ end }}
+                </div>
+            </section>
+        {{ end }}
+        </amp-accordion>
+    </ul>
+</amp-sidebar>

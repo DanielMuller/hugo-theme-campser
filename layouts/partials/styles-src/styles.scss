@@ -1,0 +1,31 @@
+$a-tags: 'a, a:active, a:hover, a:visited';
+$a-tags-hover: 'a:active, a:hover';
+
+@mixin transform($transform) {
+            transform: $transform;
+    -webkit-transform: $transform;
+        -ms-transform: $transform;
+}
+@mixin animation($animation, $delay : 0) {
+    -webkit-animation: $animation;
+    animation: $animation;
+    @if $delay > 0 {
+        -webkit-animation-delay: #{$delay}s;
+        animation-delay: #{$delay}s;
+    }
+}
+
+@import 'normalize';
+@import 'utilities';
+@import 'general';
+@import 'theme_main';
+@import 'social_home';
+@import 'post';
+@import 'author';
+@import 'animations';
+@import 'sidebar';
+@import 'pagination';
+@import 'footer';
+@import 'media900';
+@import 'media500';
+//@import 'navigation';

@@ -1,0 +1,21 @@
+{{ if not .Params.noauthor }}
+    {{$.Scratch.Set "author" .Site.Author}}
+    {{if .Params.author }}
+        {{if isset .Site.Data.authors (.Params.author | lower)}}
+            {{$author := index .Site.Data.authors (.Params.author | lower) }}
+            {{$.Scratch.Set "author" $author}}
+        {{end}}
+    {{end}}
+    {{$author := ($.Scratch.Get "author")}}
+
+    <section class="author">
+      <h4>{{$author.name}}</h4>
+      {{if $author.bio}}
+        <p>{{$author.bio}}</p>
+      {{end}}
+      <div class="author-meta">
+        {{with $author.location}}<span class="author-location icon-location">{{.}}</span>{{end}}
+        {{with $author.website}}<span class="author-link icon-link"><a href="{{.}}">{{.}}</a></span>{{end}}
+      </div>
+    </section>
+{{end}}
