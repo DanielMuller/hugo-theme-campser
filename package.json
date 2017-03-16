@@ -1,0 +1,23 @@
+{
+  "name": "Campser",
+  "version": "1.0.0",
+  "description": "AMP version of Casper theme for Hugo",
+  "main": "bin/cssgen.js",
+  "author": "goHugo-amp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielMuller/hugo-theme-campser"
+  },
+  "scripts": {
+    "build": "node ./bin/cssgen",
+    "watch": "./node_modules/.bin/nodemon -e scss -w ./ -x npm run build"
+  },
+  "license": "ISC",
+  "homepage": "https://github.com/DanielMuller/hugo-theme-campser",
+  "devDependencies": {
+    "cssnano": "^3.10.0",
+    "node-sass": "^4.5.0",
+    "nodemon": "^1.11.0",
+    "postcss": "^5.2.15"
+  }
+}
