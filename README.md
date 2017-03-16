@@ -1,0 +1,210 @@
+# Campser : A Hugo theme
+
+Campser is a single-column [AMP](https://www.ampproject.org/) theme for [Hugo](https://gohugo.io/). Its ported from [Casper theme for Hugo](https://github.com/vjeantet/hugo-theme-casper) (itself ported from [Casper theme for Ghost](https://github.com/TryGhost/Casper)).
+
+The AMP specific parts where taken from [gohugo-amp starter theme](https://gohugo-amp.gohugohq.com/).
+
+## Features
+* Google Analytics
+* Menu
+* Pagination
+* Social sharing (can be disabled by content)
+* Big cover image (optional)
+* Custom cover by content (optional)
+* Tags (optional)
+* Categories (optional)
+* ~~Disqus~~
+* ~~Schema~~
+
+# Theme assumptions
+* All blog posts are of the type `post`
+* Homepage displays a paginated list of content from the post section by default (can be configured)
+* Homepage can also display full content from articles of type `index`
+
+# Installation
+
+## Installing the theme
+```bash
+cd $website_root
+mkdir themes
+cd themes
+git clone https://github.com/DanielMuller/hugo-theme-campser campser
+rm -rf campser/.git // To avoid conflicting with the website's git configuration
+```
+
+## Install HTML minifier
+Read the styling section at [GOHUGO AMP](https://gohugo-amp.gohugohq.com/styling/) for more infos.
+```bash
+cd $website_root
+npm i
+```
+
+## Building the website
+```bash
+cd $website_root
+npm run build:prod
+```
+
+# Configuration
+**config.toml**
+
+Some configurations parameters where changed from the original Casper for Hugo theme.
+
+```toml
+title = "My awesome blog"
+baseURL = "http://example.com/"
+languageCode = "en-us"
+theme = "campser"
+[permalinks]
+    post = '/:year/:month/:slug/' # Wordpress style
+# Define the default author
+[author]
+    name = "Jonn Doe"
+    bio = "The most uninteresting man in the world."
+    location = "Normal, IL"
+    website = "http://example.com"
+    thumbnail = "/avatars/john.png"
+[params]
+    description = "my tagline"
+    cover = "/layout/cover_singapore.jpg" # Homepage cover
+    logo = "/logos/logo.png"
+    # Social links on the homepage
+    linkedinName = 'aaaa'
+    githubName = 'aaaa'
+    flickrName = 'aaaa'
+    twitterName = 'aaaa'
+    facebookName = 'aaaa'
+    instagramName = 'aaaa'
+    email = 'aaaa'
+    pinterestName = 'aaaa'
+    googlePlusName = 'aaaa'
+
+    ampElements = ["amp-accordion","amp-analytics", "amp-sidebar"] # AMP elements loaded on every page
+    themeColor = "#ffffff" # Browser bar color
+    googleanalytics = "UA-1341906-9"
+
+# Where can we share?
+[params.share]
+    twitter = true
+    gplus = true
+    pinterest = true
+    facebook = true
+```
+
+## Menus
+Menus are built by 3 components:
+
+1. External links
+
+    They are defined in *config.toml*
+    ```toml
+    [[menu.main]]
+        name = 'Home'
+        weight = 1
+        url = '/'
+
+    [[menu.main]]
+        pre = "Links"
+        name = 'My dear friend'
+        weight = 210
+        url = 'http://myfriend.com/'
+
+    [[menu.main]]
+        name = 'My photo gallery'
+        weight = 220
+        url = 'https://instagram.com/me/'
+    ```
+2. Pages
+
+    In the *Front Matter*:
+    ```toml
+    [menu.main]
+      weight = 110
+    ```
+3. Taxonomies
+
+    Links and pages are ordered by *weight*.
+
+    Taxonomies will always be shown last
+
+## Taxonomies
+The theme assumes the existence of 2 taxonomies: **Tags** and **Categories**, they don't need to be used.
+
+## Multiples authors
+Additionals authors can be defined in `data/authors/author_key.toml`
+
+The *author_key* needs to be provided as the author in the *Front Matter*.
+
+**jane.toml**
+```toml
+name = 'Jane Doe'
+bio = "The most generic woman in the world"
+location = "Normal, Il"
+website = "http://janedoe.name"
+thumbnail = "/avatars/jane.png"
+
+```
+**post/i-am-jane.md**
+```md
++++
+author = "jane"
+title = "I am Jane"
+slug = "i-am-jane"
++++
+
+Hi! My name is Jane
+```
+
+When the *author_key* can't be found, the default author is used.
+
+# Adding content
+```bash
+hugo new post/my-post.md
+```
+## Front Matter
+To automatically populate the *Front Matter* with Hugo 0.19, you need to define the theme in use in *config.toml*.
+```toml
+draft = true
+title = "Post title"
+slug = "post-title"
+tags = ["tag1","tag2"]
+categories = ["cat1","cat2"]
+image = ""
+comments = true # set false to hide Disqus (Disqus is not implemented yet)
+menu= ""        # set "main" to add this content to the main menu
+author = "" # Use default or author_key from data/authors
+noauthor = true # Hides the author on the post
+
+[amp]
+    elements = ["amp-social-share"]
+    # Adding amp-social-shares enables page sharing. Do not load amp-social-share to disable sharing.
+```
+## AMP
+To have your pages AMP valid, you need to write valid AMP content. To use an AMP element not loaded by default, you need to add it to your content page in the *Front Matter*
+```toml
+[amp]
+    elements = ["amp-image-lightbox", "amp-social-share"]
+```
+
+AMP elements can be inserted with shortcodes. Shortcodes for most of the AMP elements have been defined by the [gohugo-amp](https://gohugo-amp.gohugohq.com/shortcodes/) project.
+```md
+{{< amp-image-lightbox id="myimage" >}}
+{{< amp-image
+  alt="ALT text"
+  src="/images/my-image.png"
+  srcset="/images/my-image-small.png 300w, /images/my-image-medium.png 730w, /images/my-image.png 1024w"
+  width="300"
+  height="300"
+>}}
+```
+
+# Modifying the theme
+
+## Styles
+Styles need to be defined in the header of each page. The stylesheet is a partial in `themes/campser/layouts/partials/styles/stylesheet.html` with it's sources in `themes/campser/layouts/partials/styles-src/styles.scss`. To rebuild the stylesheet, you need to have a working `node`install and install the relevant dependencies.
+```bash
+cd themes/campser
+npm i
+npm run build
+```
+Read the styling section at [GOHUGO AMP](https://gohugo-amp.gohugohq.com/styling/) for more infos.
