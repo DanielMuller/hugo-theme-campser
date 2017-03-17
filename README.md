@@ -127,6 +127,25 @@ Menus are built by 3 components:
 
     Taxonomies will always be shown last
 
+## Favicon
+Favicons paramteres are defined under *params.favicon* in your site's *config.toml*
+```toml
+[params.favicon]
+    manifest = "manifest.json"
+    basename = "/logos/favicon"
+    ms_tilecolor = "#FFFFFF"
+    icon = [16, 32, 96, 192]
+    apple_touch = [57, 60, 72, 76, 114, 120, 144, 152, 180]
+    ms = [144]
+    ms_config = "browserconfig.xml"
+```
+You files need to be put in `/static/`, using any subfolder you define in `basename` and need to be named according to the params:
+- favicon-&lt;w&gt;x&lt;h&gt;.png
+- favicon-manifest.json
+- favicon-browserconfig.xml
+
+You can add *favicon.ico* to the static root for legacy browsers.
+
 ## Taxonomies
 The theme assumes the existence of 2 taxonomies: **Tags** and **Categories**, they don't need to be used.
 

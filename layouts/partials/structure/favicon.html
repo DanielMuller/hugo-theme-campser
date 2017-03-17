@@ -1,0 +1,12 @@
+{{- range .apple_touch -}}
+    <link rel="apple-touch-icon" sizes="{{ . }}x{{ . }}" href="{{$.basename}}-{{ . }}x{{ . }}.png" />
+{{ end }}
+{{- range .icon -}}
+    <link rel="icon" type="image/png" sizes="{{ . }}x{{ . }}" href="{{$.basename}}-{{ . }}x{{ . }}.png" />
+{{ end }}
+{{ with .manifest}}<link rel="manifest" href="{{$.basename}}-{{.}}" />{{end}}
+{{ with .ms_tilecolor}}<meta name="msapplication-TileColor" content="{{.}}" />{{end}}
+{{ range .ms }}
+    <meta name="msapplication-TileImage" content="{{$.basename}}-{{ . }}x{{ . }}.png" />
+{{end}}
+{{ with .ms_config }}<meta name="msapplication-config" content="{{$.basename}}-{{.}}" />{{ end }}
