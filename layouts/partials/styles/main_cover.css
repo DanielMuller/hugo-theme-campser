@@ -1,0 +1,41 @@
+{{ if and (isset $.Site.Params "cover_sizes") (isset $.Site.Params "cover") }}
+    {{ $cover := relURL ($.Site.Params.cover) }}
+    {{ $cover_dirname  := replaceRE "^(.+/)[^/]+[.].+$" "$1" $cover }}
+    {{ $cover_basename := replaceRE "^.+/([^/]+)[.].+$" "$1" $cover }}
+    {{ $cover_ext      := replaceRE "^.+/[^/]+[.](.+)$" "$1" $cover }}
+
+    .main-header.cover {
+        background-image: url('{{ relURL (.Site.Params.cover) }}');
+    }
+    {{ if $.Site.Params.cover_webp }}
+    @supports (-webkit-appearance:none){
+        .main-header.cover {
+            background-image: url('{{$cover_dirname}}{{$cover_basename}}.webp');
+        }
+    }
+    {{end}}
+    {{ range $size := $.Site.Params.cover_sizes }}
+      {{ range $res := $.Site.Params.cover_density }}
+        {{ $.Scratch.Set "resext" ""}}
+        {{ $.Scratch.Set "max-resolution" ""}}
+        {{ if gt $res 1 }}
+            {{$resext := $res | printf "-%01dx"}}
+            {{$.Scratch.Set "resext" $resext}}
+            {{$maxres := $res | printf " and (min-resolution: %01ddppx)"}}
+            {{ $.Scratch.Set "max-resolution" $maxres}}
+        {{end}}
+            @media screen and (max-width: {{$size}}px){{$.Scratch.Get "max-resolution"}} {
+                .main-header.cover {
+                    background-image: url('{{$cover_dirname}}{{$cover_basename}}-{{$size}}px{{$.Scratch.Get "resext"}}.{{$cover_ext}}');
+                }
+                {{ if $.Site.Params.cover_webp }}
+                @supports (-webkit-appearance:none){
+                    .main-header.cover {
+                        background-image: url('{{$cover_dirname}}{{$cover_basename}}-{{$size}}px{{$.Scratch.Get "resext"}}.webp');
+                    }
+                }
+                {{end}}
+            }
+      {{ end }}
+    {{ end }}
+{{ end }}

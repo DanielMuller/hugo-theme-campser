@@ -146,6 +146,23 @@ You files need to be put in `/static/`, using any subfolder you define in `basen
 
 You can add *favicon.ico* to the static root for legacy browsers.
 
+## Various formats for cover image
+You need to create all versions and store them in the same path as the source file with following namings:
+- filename.jpg (*original file*)
+- filename-1080px.jpg (*downscaled to 1080px width*)
+- filename-540px-2x.jpg (*downscaled to 1080px width, but used for 2x screens*)
+
+All files can have their webp counterpart. Sizes, densities and webp support need to be defined in *config.toml*
+
+**config.toml**
+```toml
+[params]
+    cover = "/images/layout/my_cover.jpg"
+    cover_sizes = [1920, 1280, 720, 360]
+    cover_density = [1, 2, 3]
+    cover_webp = true
+```
+
 ## Taxonomies
 The theme assumes the existence of 2 taxonomies: **Tags** and **Categories**, they don't need to be used.
 
