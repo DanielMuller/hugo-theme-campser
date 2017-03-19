@@ -1,0 +1,64 @@
+@media only screen and (min-width: 501px) {
+    $width: 450px;
+    $frame: 15px;
+
+    figure.polaroid::after, figure.polaroid::before {
+        content:"";
+        position:absolute;
+        z-index:-2;
+        bottom:10px;
+        width:50%;
+        height:20%;
+        max-width: $width + 2*$frame;
+        box-shadow: 0 15px 10px rgba(0,0,0,0.7);
+    }
+    figure.polaroid::after {
+        right:10px;
+        left:auto;
+        transform: rotate(3deg);
+    }
+    figure.polaroid::before {
+        left:10px;
+        right:auto;
+        transform: rotate(-3deg);
+    }
+
+    figure.polaroid {
+        width: $width + 10px;
+        position: relative;
+        padding: $frame;
+        border: none;
+        background: #fff;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+        border-radius: 4px;
+        margin-bottom: 1.5em;
+        max-width: 100%;
+    }
+    figure.polaroid amp-img {
+        display: block;
+        border:1px solid #ccc;
+    }
+    figure.polaroid figcaption {
+        font-size: 1.3em;
+        font-weight: 400;
+        font-family: 'Kaushan Script', cursive;
+        text-align: right;
+        padding: 0.8em 0.5em 0.4em 0.5em;
+    }
+}
+@media only screen and (max-width: 501px) {
+    figure.polaroid {
+        background: #fff;
+        border-radius: 1px;
+        margin-bottom: 1em;
+    }
+    figure.polaroid figcaption {
+        font-size: 0.8em;
+        font-style: italic;
+        text-align: center;
+        border-top: 1px solid lightgrey;
+        border-bottom: 1px solid lightgrey;
+        margin-top: 0.5em;
+        padding: 0.2em;
+    }
+}

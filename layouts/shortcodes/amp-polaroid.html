@@ -1,0 +1,54 @@
+{{ $imagesrc := printf "static/%s.%s" .Params.srcbase .Params.srcext }}
+{{$.Scratch.Set "srcbase" .Params.srcbase }}
+{{$.Scratch.Set "srcext" .Params.srcext }}
+{{ with (imageConfig $imagesrc)}}
+    {{$.Scratch.Set "srcwidth" .Width }}
+    {{$.Scratch.Set "srcheight" .Height }}
+{{end}}
+{{ $.Scratch.Set "srcset" "" }}
+{{ range ( slice 150 360 720 1280 1920 3840) ", "}}
+    {{ if ge ( $.Scratch.Get "srcwidth" ) . }}
+        {{$.Scratch.Add "srcset" ( printf "%s-%dpx.%s %dw, " ($.Scratch.Get "srcbase") . ($.Scratch.Get "srcext") .) }}
+    {{ end }}
+{{end}}
+{{$.Scratch.Add "srcset" ( printf "%s.%s %dw" ($.Scratch.Get "srcbase") ($.Scratch.Get "srcext") ($.Scratch.Get "srcwidth")) }}
+<figure class="polaroid no-margin center">
+<amp-img
+    src="{{.Params.srcbase}}.webp"
+    {{ with .Params.alt }}alt="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
+    {{ with .Params.attribution }}attribution="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
+    srcset="{{ range (split ($.Scratch.Get "srcset") " ") }}{{ replace . ($.Scratch.Get "srcext") "webp" }} {{ end }}"
+    width="{{ $.Scratch.Get "srcwidth" }}"
+    height="{{ $.Scratch.Get "srcheight" }}"
+    {{ with .Params.lightbox }}
+        tabindex="0"
+        on="tap:{{.}}"
+        role="link"
+    {{ end }}
+    layout="responsive"
+>
+<div fallback>
+<amp-img
+    src="{{.Params.srcbase}}.{{.Params.srcext}}"
+    {{ with .Params.alt }}alt="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
+    {{ with .Params.attribution }}attribution="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
+    srcset="{{ range (split ($.Scratch.Get "srcset") " ") }}{{ . }} {{ end }}"
+    width="{{ $.Scratch.Get "srcwidth" }}"
+    height="{{ $.Scratch.Get "srcheight" }}"
+    {{ with .Params.lightbox }}
+        tabindex="0"
+        on="tap:{{.}}"
+        role="link"
+    {{ end }}
+    layout="responsive"
+    sizes="(min-width: 500px) 450px, 100vw"
+>
+</amp-img>
+</div>
+</amp-img>
+{{ if .Params.alt }}
+<figcaption>
+    {{ with .Params.alt }}{{ . }}{{ end }}
+</figcaption>
+{{ end }}
+</figure>
