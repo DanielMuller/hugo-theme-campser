@@ -1,1 +1,8 @@
-{{ partial "amp/figure" .Params }}
+<figure{{ with .Params.class }} class="{{ . }}"{{ end }}>
+{{ partial "amp/image" .Params }}
+{{ if .Params.alt }}
+<figcaption>
+    {{ with .Params.alt }}{{ . }}{{ end }}
+</figcaption>
+{{ end }}
+</figure>
