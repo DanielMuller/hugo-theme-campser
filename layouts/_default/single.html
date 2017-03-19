@@ -1,11 +1,10 @@
 {{ partial "structure/header.html" . }}
 
 {{if .Params.image}}
-    {{if or (eq (substr .Params.image 0 7) "http://") (eq (substr .Params.image 0 8) "https://")}}
-        <header class="main-header post-head" style="background-image: url({{.Params.image}})">
-    {{ else }}
-        <header class="main-header post-head" style="background-image: url({{.Params.image}})">
-    {{ end }}
+    <header class="main-header post-head">
+    {{<amp-image
+       src="{{.Params.image}}"
+    >}}
     <nav class="main-nav overlay clearfix">
 {{else}}
     <header class="main-header post-head no-cover">
