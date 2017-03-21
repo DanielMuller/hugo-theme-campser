@@ -24,7 +24,7 @@
     }
 
     figure.polaroid {
-        width: $width + 10px;
+        width: $width;
         position: relative;
         padding: $frame;
         border: none;
@@ -34,9 +34,16 @@
         margin-bottom: 1.5em;
         max-width: 100%;
     }
+    figure.polaroid div[fallback] {
+        border: none;
+        margin:0;
+        padding:0;
+    }
     figure.polaroid amp-img {
         display: block;
-        border:1px solid #ccc;
+        outline:1px solid #ccc;
+        padding:0;
+        margin:0;
     }
     figure.polaroid figcaption {
         font-size: 1.3em;
