@@ -193,29 +193,32 @@ Hi! My name is Jane
 
 When the *author_key* can't be found, the default author is used.
 
-## Opengraph
-Most existing data will be used, but some parameters can be added in *config.toml* and *Front Matter* to enhance the opengraph data
+## Opengraph, Twitter Cards
+Most existing data will be used, but some parameters can be added in *config.toml* and *Front Matter* to enhance the opengraph and twitter cards data
 
 **config.toml**
 ```toml
 [params]
     locale = "en_US"
 [social]
-    facebook = 'mypage' // Site's Facebook page
+    facebook = 'mypage' # Site's Facebook page
     facebook_admin = 'FB admin ID for page insights'
+    twitter = 'Site twitter handle'
 [author]
-    facebook = 'authorfbpage' // Author's Facebook page
+    facebook = 'authorfbpage' # Author's Facebook page
+    twitter = 'Author Twitter handle'
 ```
 
-When using multiple authors, the *facebook" attribute can be added to each author's data.
+When using multiple authors, the *facebook* or *twitter* attribute can be added to each author's data.
 
 **Front Matter**
 ```toml
 locale = "fr_CH"
-images = ['a.jpg', 'b.jpg']
+images = ['a.jpg', 'b.jpg'] # If not provided, image will be used
 audio = 'a.ogg'
 videos = ['a.mp4', 'b.mp4']
-series = ['first', 'another'] // You need to add Taxonomies.series to your site
+series = ['first', 'another'] # You need to add Taxonomies.series to your site
+description = 'Altername description for Facebook/Twitter' # If not provided, excerpt or summary are used
 ```
 
 # Adding content

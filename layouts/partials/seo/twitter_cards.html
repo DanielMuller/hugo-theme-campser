@@ -1,0 +1,30 @@
+{{ if .IsHome }}
+    {{ if isset .Site.Params "cover" }}
+        <meta name="twitter:card" content="summary_large_image"/>
+    {{ else }}
+        <meta name="twitter:card" content="summary"/>
+    {{ end }}
+
+{{ end }}
+{{ if .IsPage }}
+    {{ if or (isset .Params "images") (isset .Params "image") }}
+        <meta name="twitter:card" content="summary_large_image"/>
+    {{ else }}
+        <meta name="twitter:card" content="summary"/>
+    {{ end }}
+
+    {{ if not .Params.noauthor }}
+        {{$.Scratch.Set "author" .Site.Author}}
+        {{if .Params.author }}
+            {{if isset .Site.Data.authors (.Params.author | lower)}}
+                {{$author := index .Site.Data.authors (.Params.author | lower) }}
+                {{$.Scratch.Set "author" $author}}
+            {{end}}
+        {{end}}
+        {{$author := ($.Scratch.Get "author")}}
+        {{ with $author.twitter }}
+            <meta name="twitter:creator" content="@{{ . }}"/>
+        {{ end }}
+    {{ end }}
+{{ end }}
+{{ with .Site.Social.twitter }}<meta name="twitter:site" content="@{{ . }}"/>{{ end }}

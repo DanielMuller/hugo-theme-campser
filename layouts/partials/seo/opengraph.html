@@ -11,6 +11,12 @@
         {{ range first 6 . }}
             <meta property="og:image" content="{{ . | absURL }}" />
         {{ end }}
+    {{ else }}
+        {{ with .Params.images }}
+            {{ range first 1 . }}
+                <meta property="og:image" content="{{ . | absURL }}" />
+            {{ end }}
+        {{ end }}
     {{ end }}
 {{ end }}
 
