@@ -1,0 +1,7 @@
+{{ partial "seo/structured/website" . }}
+{{ partial "seo/structured/organization" . }}
+{{ partial "seo/structured/breadcrumb" . }}
+
+{{ if or (eq .Params.structured.type "Article") (eq .Site.Params.defaultSchema "article") }}{{ partial "seo/structured/article" . }}{{ end }}
+{{ if or (eq .Params.structured.type "Course") (eq .Site.Params.defaultSchema "course") }}{{ partial "seo/structured/course" . }}{{ end }}
+{{ if or (eq .Params.structured.type "Recipe") (eq .Site.Params.defaultSchema "recipe") }}{{ partial "seo/structured/recipe" . }}{{ end }}

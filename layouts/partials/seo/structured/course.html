@@ -1,0 +1,15 @@
+{{ if and (isset .Params.provider "name") (isset .Params.provider "url" )}}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "name" : "{{ .Title }}",
+  "description": "{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ with .Params.Excerpt }}{{ . }}{{ else }}{{ .Summary }}{{ end }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}",
+  "provider" : {
+    "@type": "Organization",
+    "name" : "{{ .Params.provider.name }}",
+    "sameAs" : "{{ .Params.provider.url }}"
+  }
+}
+</script>
+{{ end }}

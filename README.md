@@ -14,7 +14,7 @@ The AMP specific parts where taken from [gohugo-amp starter theme](https://gohug
 * Tags (optional)
 * Categories (optional)
 * ~~Disqus~~
-* ~~Schema~~
+* Schema
 
 # Theme assumptions
 * All blog posts are of the type `post`
@@ -225,6 +225,50 @@ description = 'Altername description for Facebook/Twitter' # If not provided, ex
 **Front Matter**
 ```toml
 news_keywords = ['word1', 'word2']
+```
+
+## Schema.org
+**config.toml**
+```toml
+[params]
+    alternatePageName = 'Alternate name'
+# Organization
+    organizationName = ''
+    socialProfiles = ''
+    organizationLogo = ''
+    organizationAddress = ''
+# Breadcrumb
+    breadcrumbOnPath = false
+# Default schema type
+    defaultSchema = 'article' # recipe, course are valid too
+```
+
+**Front Matter**
+```toml
+[structured]
+    type = 'article' # recipe, course are valid too
+# For article
+[article.image]
+    src = ''
+    # ...
+# For course
+[provider]
+    name = ''
+    url = ''
+# For recipes
+[recipe]
+    category = ''
+    prepTime = ''
+    # ...
+[recipe.image]
+    src = ''
+    # ...
+[rating]
+    value = ''
+    # ...
+[nutrition]
+    servingSize = ''
+    # ...
 ```
 
 # Adding content

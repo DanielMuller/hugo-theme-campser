@@ -1,0 +1,54 @@
+{{ if not .Params.noauthor }}
+    {{$.Scratch.Set "author" .Site.Author}}
+    {{if .Params.author }}
+        {{if isset .Site.Data.authors (.Params.author | lower)}}
+            {{$author := index .Site.Data.authors (.Params.author | lower) }}
+            {{$.Scratch.Set "author" $author}}
+        {{end}}
+    {{end}}
+{{ end }}
+{{$author := ($.Scratch.Get "author")}}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "headline": "{{ .Title }}",
+  "description": "{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ with .Params.Excerpt }}{{ . }}{{ else }}{{ .Summary }}{{ end }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}",
+  "wordCount": {{ .WordCount }},
+  "datePublished" : "{{ .PublishDate.Format "2006-01-02T15:04:05" }}",
+  "dateModified" : "{{ .Date.Format "2006-01-02T15:04:05"  }}",
+{{- if isset $author "name" -}}
+  "author": {
+    "name" : "{{ $author.name }}"
+  },
+{{- end -}}
+  "image" : {
+      "@context": "http://schema.org",
+      "@type": "ImageObject",
+      "author": "{{ .Params.article.image.author }}",
+      "url": "{{ .Params.article.image.src | absURL }}",
+      "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05" }}",
+      "name": "{{ .Params.article.image.title }}",
+      "height" : {{ .Params.article.image.height }},
+      "width" : {{ .Params.article.image.width }},
+      "license" : "{{ .Params.article.image.license_link }}",
+      "isBasedOn" : "{{ .Params.article.image.link }}"
+  },
+{{- if isset $.Site.Params "publisherName" -}}
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "{{ $.Site.Params.publisherName }}",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "{{ $.Site.Params.publisherLogo }}",
+        "height" : {{ $.Site.Params.publisherLogoHeight }},
+        "width" : {{ $.Site.Params.publisherLogoWidth }}
+    }
+  },
+{{- end -}}
+  "mainEntityOfPage" : "{{ .Permalink }}"
+}
+}
+}
+</script>
