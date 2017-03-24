@@ -193,6 +193,31 @@ Hi! My name is Jane
 
 When the *author_key* can't be found, the default author is used.
 
+## Opengraph
+Most existing data will be used, but some parameters can be added in *config.toml* and *Front Matter* to enhance the opengraph data
+
+**config.toml**
+```toml
+[params]
+    locale = "en_US"
+[social]
+    facebook = 'mypage' // Site's Facebook page
+    facebook_admin = 'FB admin ID for page insights'
+[author]
+    facebook = 'authorfbpage' // Author's Facebook page
+```
+
+When using multiple authors, the *facebook" attribute can be added to each author's data.
+
+**Front Matter**
+```toml
+locale = "fr_CH"
+images = ['a.jpg', 'b.jpg']
+audio = 'a.ogg'
+videos = ['a.mp4', 'b.mp4']
+series = ['first', 'another'] // You need to add Taxonomies.series to your site
+```
+
 # Adding content
 ```bash
 hugo new post/my-post.md
