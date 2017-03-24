@@ -22,7 +22,7 @@
         {{ if isset .Site.Params "favicon" }}
             {{ partial "structure/favicon.html" .Site.Params.favicon }}
         {{ end }}
-        <title>{{ if .IsHome }}{{ .Site.Title | title }} &middot; {{ .Site.Params.description | title }}{{else}}{{ .Title | title }} &middot; {{ .Site.Title | title }}{{ end }}</title>
+        <title>{{ if .IsHome }}{{ .Site.Title | title }}{{else}}{{ .Title | title }} &middot; {{ .Site.Title | title }}{{ end }}</title>
     </head>
 <body>
 {{ partial "navigation/sidebar" .}}
