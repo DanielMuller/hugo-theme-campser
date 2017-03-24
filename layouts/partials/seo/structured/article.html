@@ -27,7 +27,7 @@
       "@context": "http://schema.org",
       "@type": "ImageObject",
       "author": "{{ .Params.article.image.author }}",
-      "url": "{{ .Params.article.image.src | absURL }}",
+      "url": "{{ with .Params.article.image.src }}{{ . | absURL }}{{ end }}",
       "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05" }}",
       "name": "{{ .Params.article.image.title }}",
       "height" : {{ .Params.article.image.height }},

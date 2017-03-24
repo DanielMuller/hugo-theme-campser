@@ -41,7 +41,7 @@
       "@context": "http://schema.org",
       "@type": "ImageObject",
       "author": "{{ .Params.recipe.image.author }}",
-      "url": "{{ .Params.recipe.image.src  | absURL }}",
+      "url": "{{ with .Params.recipe.image.src }}{{ . | absURL }}{{ end }}",
       "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05" }}",
       "name": "{{ .Params.image.title }}",
       "height" : {{ .Params.recipe.image.height }},
