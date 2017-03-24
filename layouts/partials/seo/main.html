@@ -1,2 +1,11 @@
 {{ partial "seo/opengraph" . }}
 {{ partial "seo/twitter_cards" . }}
+{{ template "_internal/schema.html" . }}
+{{/*
+{{ partial "seo/schema" . }}
+*/}}
+
+{{/*
+<meta name="twitter">
+{{ template "_internal/twitter_cards.html" . }}
+*/}}

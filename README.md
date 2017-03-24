@@ -221,6 +221,12 @@ series = ['first', 'another'] # You need to add Taxonomies.series to your site
 description = 'Altername description for Facebook/Twitter' # If not provided, excerpt or summary are used
 ```
 
+## Google News
+**Front Matter**
+```toml
+news_keywords = ['word1', 'word2']
+```
+
 # Adding content
 ```bash
 hugo new post/my-post.md
