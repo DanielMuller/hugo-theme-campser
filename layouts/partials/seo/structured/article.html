@@ -16,39 +16,91 @@
   "headline": "{{ .Title }}",
   "description": "{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ with .Params.Excerpt }}{{ . }}{{ else }}{{ .Summary }}{{ end }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}",
   "wordCount": {{ .WordCount }},
-  "datePublished" : "{{ .PublishDate.Format "2006-01-02T15:04:05" }}",
-  "dateModified" : "{{ .Date.Format "2006-01-02T15:04:05"  }}",
-{{- if isset $author "name" -}}
+  "datePublished" : "{{ .Date.Format "2006-01-02T15:04:05" }}",
+  "dateModified" : "{{ .Lastmod.Format "2006-01-02T15:04:05"  }}",
   "author": {
     "name" : "{{ $author.name }}"
   },
-{{- end -}}
+{{- if isset .Params.article "image"}}
   "image" : {
       "@context": "http://schema.org",
       "@type": "ImageObject",
       "author": "{{ .Params.article.image.author }}",
       "url": "{{ with .Params.article.image.src }}{{ . | absURL }}{{ end }}",
-      "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05" }}",
+      "datePublished": "{{ .Date.Format "2006-01-02T15:04:05" }}",
       "name": "{{ .Params.article.image.title }}",
       "height" : {{ .Params.article.image.height }},
       "width" : {{ .Params.article.image.width }},
       "license" : "{{ .Params.article.image.license_link }}",
       "isBasedOn" : "{{ .Params.article.image.link }}"
   },
-{{- if isset $.Site.Params "publisherName" -}}
+{{- else if isset .Params "image" -}}
+  {{ $imageConfig := imageConfig (printf "static%s" .Params.Image) }}
+  "image" : {
+      "@context": "http://schema.org",
+      "@type": "ImageObject",
+      "author": "{{ $author.name }}",
+      "url": "{{ with .Params.Image }}{{ . | absURL }}{{ end }}",
+      "datePublished": "{{ .Date.Format "2006-01-02T15:04:05" }}",
+      "name": "{{ .Title }}",
+      "height" : {{ $imageConfig.Height }},
+      "width" : {{ $imageConfig.Width }},
+      "license" : "https://creativecommons.org/licenses/by-sa/4.0/",
+      "isBasedOn" : ""
+  },
+{{- else if isset .Site.Params "cover" -}}
+  {{ $imageConfig := imageConfig (printf "static%s" .Site.Params.Cover) }}
+  "image" : {
+      "@context": "http://schema.org",
+      "@type": "ImageObject",
+      "author": "{{ $author.name }}",
+      "url": "{{ with .Site.Params.Cover }}{{ . | absURL }}{{ end }}",
+      "datePublished": "{{ .Date.Format "2006-01-02T15:04:05" }}",
+      "name": "{{ .Site.Title }}",
+      "height" : {{ $imageConfig.Height }},
+      "width" : {{ $imageConfig.Width }},
+      "license" : "https://creativecommons.org/licenses/by-sa/4.0/",
+      "isBasedOn" : ""
+  },
+{{- else }}
+  {{ $imageConfig := imageConfig (printf "static%s" .Site.Params.Logo) }}
+  "image" : {
+      "@context": "http://schema.org",
+      "@type": "ImageObject",
+      "author": "{{ $author.name }}",
+      "url": "{{ with .Site.Params.Logo }}{{ . | absURL }}{{ end }}",
+      "datePublished": "{{ .Date.Format "2006-01-02T15:04:05" }}",
+      "name": "{{ .Site.Title }}",
+      "height" : {{ $imageConfig.Height }},
+      "width" : {{ $imageConfig.Width }},
+      "license" : "https://creativecommons.org/licenses/by-sa/4.0/",
+      "isBasedOn" : ""
+  },
+{{- end }}
+{{- if isset $.Site.Params "publisherName" }}
   "publisher" : {
     "@type": "Organization",
     "name" : "{{ $.Site.Params.publisherName }}",
     "logo" : {
         "@type" : "ImageObject",
-        "url" : "{{ $.Site.Params.publisherLogo }}",
+        "url" : "{{ $.Site.Params.organizationLogo }}",
         "height" : {{ $.Site.Params.publisherLogoHeight }},
         "width" : {{ $.Site.Params.publisherLogoWidth }}
     }
   },
-{{- end -}}
+{{- else }}
+  {{ $imageConfig := imageConfig (printf "static%s" .Site.Params.Logo) }}
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "{{ $.Site.Title }}",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url": "{{ with .Site.Params.Logo }}{{ . | absURL }}{{ end }}",
+        "height" : 60,
+        "width" : 60
+    }
+  },
+{{- end }}
   "mainEntityOfPage" : "{{ .Permalink }}"
-}
-}
 }
 </script>
