@@ -4,9 +4,9 @@
     </header>
     <section class="post-excerpt">
         {{ if and (isset .Params "excerpt") (.Params.excerpt) }}
-            <p class="excerpt">{{ .Params.excerpt }} <a class="read-more" href="{{.RelPermalink}}">Read More…</a></p>
+            <p class="excerpt">{{ .Params.excerpt  | plainify }} <a class="read-more" href="{{.RelPermalink}}">Read More…</a></p>
         {{else}}
-            <p class="summary">{{ .Summary}}
+            <p class="summary">{{ .Summary | plainify }}
                 {{ if .Truncated }}
                     <a class="read-more" href="{{.RelPermalink}}">Read More…</a>
                 {{end}}
