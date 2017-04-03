@@ -4,7 +4,7 @@
   "@context": "http://schema.org",
   "@type": "Course",
   "name" : "{{ .Title }}",
-  "description": "{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ with .Params.Excerpt }}{{ . }}{{ else }}{{ .Summary }}{{ end }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}",
+  "description": "{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ with .Params.Excerpt }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}",
   "provider" : {
     "@type": "Organization",
     "name" : "{{ .Params.provider.name }}",

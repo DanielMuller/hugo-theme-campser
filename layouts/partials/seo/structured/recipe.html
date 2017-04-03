@@ -15,7 +15,7 @@
   "@context": "http://schema.org",
   "@type": "Recipe",
   "name": "{{ .Title }}",
-  "description": "{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ with .Params.Excerpt }}{{ . }}{{ else }}{{ .Summary }}{{ end }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}",
+  "description": "{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ with .Params.Excerpt }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}",
   "recipeCategory": "{{ .Params.recipe.category }}",
 {{ if isset $author "name"}}
   "author": {
