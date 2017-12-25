@@ -1,4 +1,11 @@
-{{ $imagesrc := printf "static/%s.%s" .Params.srcbase .Params.srcext }}
+{{ if eq (getenv "HUGO_ENV") "production"}}
+    {{$.Scratch.Set "staticDir" "static"}}
+{{ else }}
+    {{$.Scratch.Set "staticDir" "images-src"}}
+{{ end }}
+{{$staticDir := ($.Scratch.Get "staticDir")}}
+
+{{ $imagesrc := printf "%s/%s.%s" $staticDir .Params.srcbase .Params.srcext }}
 {{$.Scratch.Set "srcbase" .Params.srcbase }}
 {{$.Scratch.Set "srcext" .Params.srcext }}
 {{ with (imageConfig $imagesrc)}}
