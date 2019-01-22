@@ -8,7 +8,7 @@
         background-image: url('{{ relURL (.Site.Params.cover) }}');
     }
     {{ if $.Site.Params.cover_webp }}
-    @supports (-webkit-appearance:none){
+    @supports (background-image: -webkit-image-set(url('{{$cover_dirname}}{{$cover_basename}}.webp') 1x)){
         .main-header.cover {
             background-image: url('{{$cover_dirname}}{{$cover_basename}}.webp');
         }
@@ -29,7 +29,7 @@
                     background-image: url('{{$cover_dirname}}{{$cover_basename}}-{{$size}}px{{$.Scratch.Get "resext"}}.{{$cover_ext}}');
                 }
                 {{ if $.Site.Params.cover_webp }}
-                @supports (-webkit-appearance:none){
+                @supports (background-image: -webkit-image-set(url('{{$cover_dirname}}{{$cover_basename}}-{{$size}}px{{$.Scratch.Get "resext"}}.webp') 1x)){
                     .main-header.cover {
                         background-image: url('{{$cover_dirname}}{{$cover_basename}}-{{$size}}px{{$.Scratch.Get "resext"}}.webp');
                     }
